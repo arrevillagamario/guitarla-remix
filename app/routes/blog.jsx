@@ -9,6 +9,15 @@ export async function loader() {
   return posts.data;
 }
 
+export function meta() {
+  return [
+    {
+      title: "GuitarLA - Nuestro blog",
+      description: "GuitarLA, Blog de musica, venta de guitarras",
+    },
+  ];
+}
+
 export function links() {
   return [
     {
