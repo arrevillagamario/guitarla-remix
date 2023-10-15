@@ -3,11 +3,19 @@ import { getGuitarra } from "../models/guitarras.server.js";
 import { useLoaderData } from "@remix-run/react";
 import styles from "../styles/guitarras.css";
 
-export async function loader(req) {
-  const guitarraUrl = req.params.guitarraUrl;
+export async function loader(data) {
+  const { params } = data;
+  const guitarraUrl = params.guitarraUrl;
   const guitarra = await getGuitarra(guitarraUrl);
 
-  return guitarra;
+  if (guitarra.data.length === 0) {
+    throw new Response({
+      status: 404,
+      statusText: "Guitarra no encontrada",
+    });
+  } else {
+    return guitarra;
+  }
 }
 
 export function meta({ data }) {
