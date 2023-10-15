@@ -2,8 +2,6 @@ import { Link } from "@remix-run/react";
 import { formatearFecha } from "../utils/helpers";
 
 const Post = ({ post }) => {
-  console.log(post);
-
   const { titulo, contenido, imagen, url, publishedAt } = post;
 
   return (
