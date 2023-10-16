@@ -10,7 +10,12 @@ import Curso from "../components/curso.jsx";
 import stylesCurso from "../styles/curso.css";
 
 export function meta() {
-  return [];
+  return [
+    {
+      title: "GuitarLA - inicio",
+      description: "GuitarLA, Tienda de guitarras, guitarras",
+    },
+  ];
 }
 
 export function links() {

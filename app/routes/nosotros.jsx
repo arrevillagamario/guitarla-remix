@@ -1,6 +1,7 @@
 import React from "react";
 import imagen from "../../public/img/nosotros.jpg";
 import styles from "../styles/nosotros.css";
+
 //Implementamos una funcion meta que se mostrara cuando el sitio se encuentre en la pagina de nosotros
 
 export function meta() {

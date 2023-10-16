@@ -1,5 +1,5 @@
 import styles from "../styles/guitarras.css";
-import { Outlet } from "@remix-run/react";
+import { Outlet, useOutletContext } from "@remix-run/react";
 
 export const links = () => {
   return [
@@ -14,7 +14,7 @@ function Tienda() {
   return (
     <div>
       <main className="contenedor">
-        <Outlet />
+        <Outlet context={useOutletContext()} />
       </main>
     </div>
   );

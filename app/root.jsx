@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   Meta,
   Links,
@@ -56,11 +56,20 @@ export function links() {
 }
 
 export default function App() {
+  const [carrito, setCarrito] = useState([]);
+
+  const agregarCarrito = (guitarra) => {
+    setCarrito([...carrito, guitarra]);
+  };
   return (
     //En la funcion principal retornamos la fucion document que es donde se alojara el archivo html
     <Document>
       {/* Con el outlet podremos mostrar el contenido de las demas paginas */}
-      <Outlet />
+      <Outlet
+        context={{
+          agregarCarrito,
+        }}
+      />
     </Document>
   );
 }
