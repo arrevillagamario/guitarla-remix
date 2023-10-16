@@ -1,17 +1,6 @@
-import React from "react";
 import { useLoaderData } from "@remix-run/react";
 import { getGuitarras } from "../models/guitarras.server.js";
-import styles from "../styles/guitarras.css";
 import ListadoGuitarras from "../components/listado-guitarras.jsx";
-
-export const links = () => {
-  return [
-    {
-      rel: "stylesheet",
-      href: styles,
-    },
-  ];
-};
 
 export const meta = (params) => {
   return [
@@ -32,9 +21,7 @@ function Tienda() {
 
   return (
     <div>
-      <main className="contenedor">
-        <ListadoGuitarras guitarras={guitarras} />
-      </main>
+      <ListadoGuitarras guitarras={guitarras} />
     </div>
   );
 }

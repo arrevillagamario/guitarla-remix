@@ -1,7 +1,6 @@
 import React from "react";
 import { getGuitarra } from "../models/guitarras.server.js";
 import { useLoaderData } from "@remix-run/react";
-import styles from "../styles/guitarras.css";
 
 export async function loader(data) {
   const { params } = data;
@@ -28,19 +27,11 @@ export function meta({ data }) {
   ];
 }
 
-export function links() {
-  return [
-    {
-      rel: "stylesheet",
-      href: styles,
-    },
-  ];
-}
 const Guitarra = () => {
   const guitarra = useLoaderData();
   const { nombre, descripcion, precio, imagen } = guitarra.data[0].attributes;
   return (
-    <main className="contenedor guitarra">
+    <div className="guitarra">
       <img
         src={imagen.data.attributes.url}
         alt={`Imagen de guitarra ${nombre}`}
@@ -52,7 +43,7 @@ const Guitarra = () => {
         <p className="texto">{descripcion}</p>
         <p className="precio">${precio}</p>
       </div>
-    </main>
+    </div>
   );
 };
 
