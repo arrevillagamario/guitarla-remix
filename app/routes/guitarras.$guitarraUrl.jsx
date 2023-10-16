@@ -50,7 +50,11 @@ const Guitarra = () => {
       cantidad,
     };
     data.agregarCarrito(guitarraSeleccionada);
+    alert(` Se agrego: ${guitarraSeleccionada.nombre}
+    Cantidad: ${guitarraSeleccionada.cantidad}
+    `);
   };
+
   return (
     <div className="guitarra">
       <img

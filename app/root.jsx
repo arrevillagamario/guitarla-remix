@@ -59,7 +59,21 @@ export default function App() {
   const [carrito, setCarrito] = useState([]);
 
   const agregarCarrito = (guitarra) => {
-    setCarrito([...carrito, guitarra]);
+    //Encontrar coincidencia de id
+    if (carrito.some((guitaraState) => guitaraState.id === guitarra.id)) {
+      //Asignar variable he iterar sobre el carrito
+      const carritoActualizado = carrito.map((guitaraState) => {
+        if (guitaraState.id === guitarra.id) {
+          //Reescribir la cantidad
+          guitaraState.cantidad = guitarra.cantidad;
+        }
+        return guitaraState;
+      });
+      //añadir al carrito
+      setCarrito(carritoActualizado);
+    } else {
+      setCarrito([...carrito, guitarra]);
+    }
   };
   return (
     //En la funcion principal retornamos la fucion document que es donde se alojara el archivo html
@@ -68,6 +82,7 @@ export default function App() {
       <Outlet
         context={{
           agregarCarrito,
+          carrito,
         }}
       />
     </Document>
