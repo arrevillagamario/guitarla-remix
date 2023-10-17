@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getGuitarra } from "../models/guitarras.server.js";
 import { useLoaderData, useOutletContext } from "@remix-run/react";
+import Swal, { SweetAlertCustomClass } from "sweetalert2";
 
 export async function loader(data) {
   const { params } = data;
@@ -50,9 +51,14 @@ const Guitarra = () => {
       cantidad,
     };
     data.agregarCarrito(guitarraSeleccionada);
-    alert(` Se agrego: ${guitarraSeleccionada.nombre}
-    Cantidad: ${guitarraSeleccionada.cantidad}
-    `);
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `Se añadio correctamente ${guitarraSeleccionada.nombre}: ${guitarraSeleccionada.cantidad}`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
   return (

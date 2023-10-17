@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import styles from "../styles/carrito.css";
 import { useOutletContext } from "@remix-run/react";
+import Swal from "sweetalert2";
 
 export function links() {
   return [
@@ -21,9 +23,20 @@ export function meta() {
 }
 
 const Carrito = () => {
+  const [total, setTotal] = useState(0);
+  const [bandera, setBandera] = useState(false);
   const data = useOutletContext();
 
-  const { carrito } = data;
+  const { carrito, actualizarCantidad, eliminarGuitarra } = data;
+
+  useEffect(() => {
+    const calculo = carrito.reduce(
+      (total, producto) => total + producto.cantidad * producto.precio,
+      0
+    );
+    setTotal(calculo);
+  }, [carrito]);
+
   return (
     <main className="contenedor">
       <h1 className="heading">Carrito de compras</h1>
@@ -42,21 +55,45 @@ const Carrito = () => {
                   </div>
                   <div>
                     <p className="nombre">{producto.nombre}</p>
-                    <p className="cantidad">Cantidad: {producto.cantidad}</p>
+                    <p className="cantidad">Cantidad:</p>
+                    <select
+                      value={producto.cantidad}
+                      className="select"
+                      onChange={(e) =>
+                        actualizarCantidad({
+                          cantidad: parseInt(e.target.value),
+                          id: producto.id,
+                        })
+                      }
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
                     <p className="precio">
-                      Precio unitario: $<span>{producto.precio}</span>
+                      <span>${producto.precio}</span>
                     </p>
                     <p className="subtotal">
-                      Subtotal: $
-                      <span>{producto.precio * producto.cantidad}</span>
+                      Subtotal:
+                      <span>${producto.precio * producto.cantidad}</span>
                     </p>
                   </div>
+                  <button
+                    type="button"
+                    className="btn-eliminar"
+                    onClick={() => eliminarGuitarra(producto.id)}
+                  >
+                    x
+                  </button>
                 </div>
               ))}
         </div>
+
         <aside className="resumen">
           <h3 className="resumen">Resumen del pedido</h3>
-          <p>Total a pagar: $</p>
+          <p>Total a pagar: ${total}</p>
         </aside>
       </div>
     </main>

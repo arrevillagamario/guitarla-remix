@@ -75,6 +75,24 @@ export default function App() {
       setCarrito([...carrito, guitarra]);
     }
   };
+
+  const actualizarCantidad = (guitarra) => {
+    const carritoActualizado = carrito.map((guitarraState) => {
+      if (guitarraState.id === guitarra.id) {
+        guitarraState.cantidad = guitarra.cantidad;
+      }
+      return guitarraState;
+    });
+
+    setCarrito(carritoActualizado);
+  };
+
+  const eliminarGuitarra = (id) => {
+    const carritoEliminar = carrito.filter(
+      (guitaraState) => guitaraState.id !== id
+    );
+    setCarrito(carritoEliminar);
+  };
   return (
     //En la funcion principal retornamos la fucion document que es donde se alojara el archivo html
     <Document>
@@ -83,6 +101,8 @@ export default function App() {
         context={{
           agregarCarrito,
           carrito,
+          actualizarCantidad,
+          eliminarGuitarra,
         }}
       />
     </Document>
