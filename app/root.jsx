@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Meta,
   Links,
@@ -56,7 +56,20 @@ export function links() {
 }
 
 export default function App() {
-  const [carrito, setCarrito] = useState([]);
+  const carritoLS =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("carrito")) ?? []
+      : [];
+  const [carrito, setCarrito] = useState(carritoLS);
+
+  useEffect(() => {
+    if (carrito?.length === 0) return;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
+
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
 
   const agregarCarrito = (guitarra) => {
     //Encontrar coincidencia de id
@@ -88,10 +101,11 @@ export default function App() {
   };
 
   const eliminarGuitarra = (id) => {
-    const carritoEliminar = carrito.filter(
-      (guitaraState) => guitaraState.id !== id
+    const carritoActualizado = carrito.filter(
+      (guitarraState) => guitarraState.id !== id
     );
-    setCarrito(carritoEliminar);
+    carritoActualizado.length === 0 && localStorage.setItem("carrito", "[]");
+    setCarrito(carritoActualizado);
   };
   return (
     //En la funcion principal retornamos la fucion document que es donde se alojara el archivo html

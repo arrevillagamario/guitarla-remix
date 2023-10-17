@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/carrito.css";
 import { useOutletContext } from "@remix-run/react";
-import Swal from "sweetalert2";
+import { ClientOnly } from "remix-utils";
 
 export function links() {
   return [
@@ -43,9 +43,9 @@ const Carrito = () => {
       <div className="contenido">
         <div className="carrito">
           <h2 className="carrito">Articulos</h2>
-          {carrito.length === 0
+          {carrito?.length === 0
             ? "Carrito vacío"
-            : carrito.map((producto) => (
+            : carrito?.map((producto) => (
                 <div key={producto.id} className="producto">
                   <div>
                     <img
