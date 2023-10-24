@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/carrito.css";
 import { useOutletContext } from "@remix-run/react";
-import { ClientOnly } from "remix-utils";
 
 export function links() {
   return [
